@@ -14,12 +14,17 @@ class Point
     Point.new geo_json_hash[:coordinates][0], geo_json_hash[:coordinates][1]
   end
 
-  def self.mongoize params
-    case params
-    when Point
-      geo_json_hash = { type: "Point", coordinates: [params.longitude, params.latitude] }
+  def self.mongoize object
+    case object
+    when Point then object.mongoize
     when Hash
-      params
+      if object[:type] #in GeoJSON Point format
+        Point.new(object[:coordinates][0], object[:coordinates][1]).mongoize
+      else # in legacy format
+        Point.new(object[:lng], object[:lat]).mongoize
+      end
+    else
+      object
     end
   end
 
