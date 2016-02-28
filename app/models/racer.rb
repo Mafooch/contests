@@ -6,6 +6,8 @@ class Racer
   embeds_one :primary_address, class_name: "Address", as: :addressable
   has_one :medical_record
 
+  validates_presence_of :first_name, :last_name
+
   def races
     Contest.where(:"entrants.racer_id" => self.id).map do |contest|
       contest.entrants.where(racer_id: self.id).first
