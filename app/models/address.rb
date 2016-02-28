@@ -5,4 +5,5 @@ class Address
   field :state, type: String
   field :country, type: String
   field :geolocation, type: Point
+  embedded_in :racer
 end
