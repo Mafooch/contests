@@ -4,6 +4,7 @@ class Racer
   field :ln, as: :last_name, type: String
   field :dob, as: :date_of_birth, type: Date
   embeds_one :primary_address, class_name: "Address", as: :addressable
+  has_one :medical_record
 
   def races
     Contest.where(:"entrants.racer_id" => self.id).map do |contest|
