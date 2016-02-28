@@ -4,4 +4,5 @@ class Contest
   field :name, type: String
   field :date, type: Date
   belongs_to :venue
+  embeds_many :entrants
 end

@@ -5,6 +5,7 @@ class Entrant
   field :group, type: String
   field :secs, type: Float
   belongs_to :racer
+  embedded_in :contest # m:1, annotated, embedded relationship
 
   before_create do |entrant|
     entrant.name = "#{racer.last_name}, #{racer.first_name}"
